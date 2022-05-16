@@ -2,6 +2,11 @@ import os, sys
 from flask import Flask, request, Response
 from flask.templating import render_template
 
+# os.getcwd()
+real_path = os.path.dirname(os.path.realpath(__file__))
+sub_path = os.path.split(real_path)[0]
+os.chdir(sub_path)
+
 app = Flask(__name__)
 app.debug = True  # activating debug mode
 
@@ -13,25 +18,32 @@ app.debug = True  # activating debug mode
 def index():
     return render_template('index.html')
 
-@app.route('/nst_get')
+@app.route('/test_get')
 def nst_get():
     return render_template('test_get.html')
 
-@app.route('/nst_post', methods=['GET', 'POST'])
+@app.route('/test_post', methods=['GET', 'POST'])
 def nst_post():
     if request.method == 'POST':
-        # Reference image
-        refer_img = request.form['refer.img']
-        refer_img_path = 'static/images/'+str(refer_img)
+        # Reference Image
+        refer_img = request.form['refer_img']
+        refer_img_path = '/images/nst_get/' + str(refer_img)
 
-    return render_template('test_post.html', refer_img=refer_img_path)
+        # User Image (target image)
+        user_img = request.files['user_img']
+        user_img.save('./aws-flask/static/images/' + str(user_img.filename))
+        user_img_path = '/images/' + str(user_img.filename)
+
+        # Neural Style Transfer
+        # transfer_img = neural_style_transfer.main(refer_img_path, user_img_path)
+        # transfer_img_path = '.static/images/'+str(transfer_img.split('/')[-1])
+
+    return render_template('test_post.html', refer_img=refer_img_path,
+                           user_img=user_img_path)
 
 
 
 
-@app.route('/<user_name>/<int:user_id>')
-def user(user_name, user_id):
-    return f'Hello, {user_name}({user_id})!'
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="127.0.0.1", port="5000")

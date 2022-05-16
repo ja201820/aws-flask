@@ -1,10 +1,32 @@
+<!--결과 출력 페이지-->
+<!--Flask로 부터 넘겨 받은 결과 이미지를 받아서 출력-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge; chrome=1">
+    <title>Flask Image Get</title>
 </head>
 <body>
-
+    <div class="side-page-main-div">
+        <table align="center">
+            <tr>
+                <td><h2 align="center">Reference Image</h2></td>
+                <td><h2 align="center">Target Image</h2></td>
+            </tr>
+            <tr align="center">
+                <td><img class='test_img' src="{{url_for('static', filename=refer_img)}}"></td>
+                <td><img class="test_img" src="{{url_for('static', filename=user_img)}}"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><h2 style="color: #8C1DF3">Transfer Image</h2></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><img class="test_result_img" src="{{url_for('static', filename=transfer_img)}}"></td>
+            </tr>
+        </table>
+    </div>
+    <br>
 </body>
 </html>
