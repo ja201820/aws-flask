@@ -27,12 +27,12 @@ def nst_post():
     if request.method == 'POST':
         # Reference Image
         refer_img = request.form['refer_img']
-        refer_img_path = '/images/nst_get/' + str(refer_img)
+        refer_img_path = 'static/images/test_get/' + str(refer_img)
 
         # User Image (target image)
         user_img = request.files['user_img']
         user_img.save('./aws-flask/static/images/' + str(user_img.filename))
-        user_img_path = '/images/' + str(user_img.filename)
+        user_img_path = 'static/images/' + str(user_img.filename)
 
         # Neural Style Transfer
         # transfer_img = neural_style_transfer.main(refer_img_path, user_img_path)
