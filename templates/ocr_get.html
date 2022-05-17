@@ -1,17 +1,13 @@
-<!--user input 받는 페이지-->
-<!--이미지를 Flask로 넘겨주는 페이지이므로 form 태그의 POST 방식을 수행-->
-<!--neural style transfer 학습을 위한 reference 이미지 경로를 지정하여 표시-->
-<!--사용자로부터 이미지 파일을 입력 받음-->
-<!--확인 버튼을 통해 선택한 reference 이미지와 사용자 이미지를 전송-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge; chrome=1">
-    <title>Flask Image Get</title>
+    <title>Flask image get</title>
 </head>
 
+<!--preview Image javascript-->
 <script type="text/javascript">
 	function previewImage(targetObj, view_area) {
 	var preview = document.getElementById(view_area); //div id
@@ -59,32 +55,16 @@
 
 <body>
 <br>
-<h1 align="center">Neural Style Transfer</h1>
+<h1 align="center">Optical Character Recognition</h1>
 <br>
-<form align="center" action="/test_post" method="POST" enctype="multipart/form-data">
-    <h2 align="center" style="color: #353535;">Reference Images</h2>
-    <table align="center">
-        <tr>
-            <td><img class="refer_img" src="./static/images/test_get/test_reference1.jpg"></td>
-            <td><img class="refer_img" src="./static/images/test_get/test_reference2.jpg"></td>
-            <td><img class="refer_img" src="./static/images/test_get/test_reference3.jpg"></td>
-            <td><img class="refer_img" src="./static/images/test_get/test_reference4.jpg"></td>
-        </tr>
-        <tr>
-            <td><input type="radio" name="refer_img" value="test_reference1.jpg"></td>
-            <td><input type="radio" name="refer_img" value="test_reference2.JPG"></td>
-            <td><input type="radio" name="refer_img" value="test_reference3.jpg"></td>
-            <td><input type="radio" name="refer_img" value="test_reference4.jpg"></td>
-        </tr>
-    </table>
-    <br><br>
+<form align="center">
+    <h2 align="center">文字を抽出する写真を選んで下さい</h2>
     <h2 align="center">Target Image</h2>
     <div align="center" id="view_area"></div>
     <br>
-    <input type="file" name="user_img" id="user_img" value="userImage" onchange="previewImage(this, 'view_area')"/>
-    <input type="submit" value="確認"/>
+    <input type="file" name="ocr_img" id="ocr_img" value="ocrImage" onchange="previewImage(this, 'view_area')"/>
+    <input type="submit" value="確認">
 </form>
-<br><br><br>
 
 </body>
 </html>
