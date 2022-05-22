@@ -1,20 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <!--  콘텐츠 속성의 정보 / 값에 대한 HTTP 헤더 - chrome을 사용하는 유저에게 렌더링  -->
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge; chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS-Flask Index</title>
+	<!--  Bootstrap core CSS  -->
+	<!--    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/united/bootstrap.min.css" integrity="sha384-JW3PJkbqVWtBhuV/gsuyVVt3m/ecRJjwXC3gCXlTzZZV+zIEEl6AnryAriT7GWYm" crossorigin="anonymous"> 	<meta charset="UTF-8">
+	<!--  콘텐츠 속성의 정보 / 값에 대한 HTTP 헤더 - chrome을 사용하는 유저에게 렌더링  -->
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge; chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AWS-Flask Index</title>
 </head>
+
 <body>
-    <br>
-    <h1 align="center">Hello AWS-Flask for Deep Learning</h1>
-    <br>
+<style type="text/css">
+
+	.navbar{
+		opacity: 0.85;
+	}
+	.navbar.activated{
+		opacity: 1;
+	}
+	.nav-link{
+		font-weight: bold;
+	}
+
+	.main-img{
+		max-height: 300px;
+		height: auto;
+		overflow: hidden;
+	}
+
+	footer{
+		padding: 0px 0px;
+		width: 100%;
+		height: auto;
+		position: relative;
+	}
+
+</style>
+
+
+<!-- 상단 카테고리 -->
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Navbar</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="/aws_info">AWS?</a></li>
+					<li class="nav-item"><a class="nav-link" href="/aws_service">AWS services</a></li>
+					<li class="nav-item"><a class="nav-link" href="/">data store</a></li>
+					<li class="nav-item"><a class="nav-link" href="/test_get">Neural Style Transfer</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+
+<!-- 메인 이미지  -->
+<br>
+<h1 align="center">AWS services for Developer</h1>
+<div class="contents-box"><img class="main-img" src="/static/images/index/aws-logo.png"></div>
+<br>
 <ul>
-    <li><h2><a href="/test_get">Neural Style Transfer</a></h2></li>
-    <li><h2><a href="/ocr_get">Optical Character Recognition</a></h2></li>
+	<li><h3><a href="/test_get">Neural Style Transfer</a></h3></li>
+	<li><h3><a href="/ocr_get">Optical Character Recognition</a></h3></li>
 </ul>
 </body>
-<footer align="center">Powerd by <strong>© Tokio Marine Nichido Systems JV.Kim</strong></footer>
+
+
+<footer>
+	<br>
+	<table class="footer_table" align="center">
+		<tr>
+			<td colspan="3" style="font-weight: bold; color: #747474;">© Tokio Marine Nichido Systems JV.Kim</td>
+			<td><img src="/static/images/index/tmnf-logo.png"></td>
+		</tr>
+	</table>
+</footer>
+
 </html>
