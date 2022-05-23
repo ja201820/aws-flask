@@ -100,7 +100,7 @@ def main(refer_img_path, target_img_path):
     refer_img_path = refer_img_path.split('/')[-1]
     target_img_path = target_img_path.split('/')[-1]
     # image 경로
-    style_reference_image_path = './static/images/test_get/' + refer_img_path  # 스타일 참조 이미지
+    style_reference_image_path = './static/images/nst_get/' + refer_img_path  # 스타일 참조 이미지
     target_image_path = './static/images/' + target_img_path  # 타깃 이미지
 
     # 모든 이미지를 fixed-size(400pixel)로 변경
@@ -161,7 +161,7 @@ def main(refer_img_path, target_img_path):
 
     evaluator = Evaluator()
     refer_img_name = refer_img_path.split('.')[0].split('/')[-1]
-    result_prefix = './static/images/test_result_/' + refer_img_name
+    result_prefix = './static/images/nst_result_/' + refer_img_name
     iterations = 20
 
     # 뉴럴 스타일 트랜스퍼의 손실을 최소화하기 위해 생성된 이미지에 대해 L-BFGS 최적화를 수행합니다

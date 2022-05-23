@@ -18,16 +18,28 @@ app.debug = True  # activating debug mode
 def index():
     return render_template('index.html')
 
-@app.route('/test_get')
-def test_get():
-    return render_template('test_get.html')
+@app.route('/aws_info')
+def aws_info():
+    return render_template('aws_info.html')
 
-@app.route('/test_post', methods=['GET', 'POST'])
-def test_post():
+@app.route('/flask_info')
+def flask_info():
+    return render_template('flask_info.html')
+
+@app.route('/dl_info')
+def dl_info():
+    return render_template('dl_info.html')
+
+@app.route('/nst_get')
+def nst_get():
+    return render_template('nst_get.html')
+
+@app.route('/nst_post', methods=['GET', 'POST'])
+def nst_post():
     if request.method == 'POST':
         # Reference Image
         refer_img = request.form['refer_img']
-        refer_img_path = 'images/test_get/' + str(refer_img)
+        refer_img_path = 'images/nst_get/' + str(refer_img)
 
         # User Image (target image)
         user_img = request.files['user_img']
@@ -37,31 +49,52 @@ def test_post():
         # Neural Style Transfer
         # transfer_img = neural_style_transfer.main(refer_img_path, user_img_path)
         # transfer_img_path = 'images/'+str(transfer_img.split('/')[-1])
-        transfer_img_path = 'images/test_result_/test_reference1.png'
+        transfer_img_path = 'images/nst_result_/nst_reference1.png'
 
-    return render_template('test_post.html', refer_img=refer_img_path,
+    return render_template('nst_post.html', refer_img=refer_img_path,
                            user_img=user_img_path, transfer_img=transfer_img_path)
 
+@app.route('/tsc_get')
+def tsc_get():
+    return render_template('tsc_get.html')
 
-@app.route('/ocr_get')
-def ocr_get():
-    return render_template('ocr_get.html')
-
-@app.route('/ocr_post', methods=['GET', 'POST'])
-def ocr_post():
+@app.route('/tsc_post', methods=['GET', 'POST'])
+def tsc_post():
     if request.method == 'POST':
 
         # User Image (target image)
-        ocr_img = request.files['ocr_img']
-        ocr_img.save('./aws-flask/static/images/' + str(ocr_img.filename))
-        ocr_img_path = 'images/' + str(ocr_img.filename)
+        tsc_img = request.files['tsc_img']
+        tsc_img.save('./aws-flask/static/images/' + str(tsc_img.filename))
+        tsc_img_path = 'images/' + str(tsc_img.filename)
 
         # Optical Character Recognition
         # tr_img = neural_style_transfer.main(refer_img_path, user_img_path)
         # transfer_img_path = '.static/images/'+str(transfer_img.split('/')[-1])
 
-    return render_template('test_post.html', ocr_img=ocr_img_path)
+    return render_template('tsc_post.html', tsc_img=tsc_img_path)
 
+
+@app.route('/tlad_get')
+def tlad_get():
+    return render_template('tlad_get.html')
+
+@app.route('/tlad_post', methods=['GET', 'POST'])
+def tlad_post():
+    # if request.method == 'POST':
+
+    return render_template('tsc_post.html')
+
+
+@app.route('/ddd_get')
+def ddd_get():
+    return render_template('ddd_get.html')
+
+
+@app.route('/ddd_post', methods=['GET', 'POST'])
+def ddd_post():
+    # if request.method == 'POST':
+
+    return render_template('ddd_post.html')
 
 
 if __name__ == '__main__':
