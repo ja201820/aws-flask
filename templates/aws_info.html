@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge; chrome=1">
-	<title>Flask Image POST</title>
+	<title>AWS Information</title>
 </head>
 
 <style type="text/css">
@@ -36,11 +36,14 @@
 	.nav-link{
 		font-weight: bold;
 	}
-	video {
- 		width: 100%;
-  		max-width: 32rem;
+	.side-page-main-div{
+		padding-top: 100px;
+		margin-left: 15%;
+		margin-right: 15%
 	}
-
+	.side-page-main-div img{
+		width: 100%;
+	}
 </style>
 
 <!-- 상단 카테고리 -->
@@ -67,45 +70,45 @@
 	</nav>
 </header>
 
+<!-- AWS cloud 설명 -->
+<div class="side-page-main-div">
 
-<h1>AWSとは？</h1>
+	<h2 style="color: #353535" id="クラウドコンピューティング">クラウドコンピューティングとは</h2><p><img style="max-width: 600px;" src="/static/images/index/cloud-computing.png" width="500"/></p>
+	<p>합성곱 신경망은 기본적으로 위와 같은 구조로 이루어져 있다. 위 ConvNet을 크게 3덩어리로 짤라서 보면 아래와 같다.</p>
+	<br><br>
 
-<video src="./static/videos/test_video.mp4" id="video_obj" controls></video>
+	<h2 style="color: #8C1DF3" id="awsとは">AWS によるクラウドコンピューティング</h2>
+	<br>
+	<p>アマゾン ウェブ サービス (AWS) は、世界で最も包括的で広く採用されているクラウドプラットフォームです。世界中のデータセンターから 200 以上のフル機能のサービスを提供しています。急成長しているスタートアップ、大企業、主要な政府機関など、何百万ものお客様が AWS を使用してコストを削減し、俊敏性を高め、イノベーションを加速させています。&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;- AWS 公式<br><br></p>
 
-<script>
-    function video_start() {
-        document.getElementById("video_obj").play();
-    }
+	<blockquote>
+		<p><strong><em>1. Cost Savings</em></strong><br><strong><em>2. Elasticity</em></strong><br><strong><em>3. Innovation Faster</em></strong><br><strong><em>4. Go Global in minute</em></strong></p>
+	</blockquote>
+	<p>위 구조를 간단히 설명하면 위에서도 말했듯이 ConvNet은 단순 FC Layer로만 구성되어 있지 않다. Convolutional Layer와 Pooling Layer라는 과정을 거치게 되는데 이는 Input Image의 주요 특징 벡터를 추출하는 과정이라고 할 수 있다. 그 후 이렇게 추출된 주요 특징 벡터들은 그제야 FC Layer를 거치며 1차원 벡터로 변환되고 마지막 Output layer에서 활성화 함수인 Softmax함수를 통해 각 해당 클래스의 확률로 출력되게 된다. 아래에서 각 과정을 좀 더 상세히 살펴보겠다.<br><br></p>
 
-<!--const video = document.querySelector("video");-->
+	<h3 id="Cost-Savings"><a href="#Cost-Savings" class="headerlink" title="1. Cost Savings"></a>1. Cost Savings</h3>
+	<p>Input Layer는 입력된 이미지 데이터가 최초로 거치게 되는 Layer이다. 모두가 알고 있듯이 이미지는 단순 1차원의 데이터가 아니다. 이미지는 기본적으로 <strong><em>(높이, 넓이, 채널)</em></strong>의 크기를 갖는 3차원의 크기를 가지며, 여기서 채널(channels)의 경우 Gray Scale(1)이냐 RGB(3)이냐 에 따라 크기가 달라지게 된다. (채널의 컬러 공간은 Gray, RGB, HSV, CMYK 등 다양하다)<br>
+		<br><img style="max-width: 600px;" src="/static/images/index/traffic-scaling.png"/></p>
+	<p>위와 같은 형태는 높이 4, 넓이 4, 채널 RGB를 갖고 있으므로 위 이미지의 shape은 (4, 4, 3)으로 표현할 수 있으며, </p><br>
 
-<!--function startPreview() {-->
-<!--  video.muted = true;-->
-<!--  video.currentTime = 1;-->
-<!--  video.playbackRate = 0.5;-->
-<!--  video.play();-->
-<!--}-->
+	<h3 id="Elasticity"><a href="#Elasticity" class="headerlink" title="2. Elasticity"></a>2. Elasticity</h3>
+	<p>Input Layer는 입력된 이미지 데이터가 최초로 거치게 되는 Layer이다. 모두가 알고 있듯이 이미지는 단순 1차원의 데이터가 아니다. 이미지는 기본적으로 <strong><em>(높이, 넓이, 채널)</em></strong>의 크기를 갖는 3차원의 크기를 가지며, 여기서 채널(channels)의 경우 Gray Scale(1)이냐 RGB(3)이냐 에 따라 크기가 달라지게 된다. (채널의 컬러 공간은 Gray, RGB, HSV, CMYK 등 다양하다)<br>
+		<br><img style="max-width: 600px;" src="/static/images/index/aws-resilient.png"/></p>
+	<p>위와 같은 형태는 높이 4, 넓이 4, 채널 RGB를 갖고 있으므로 위 이미지의 shape은 (4, 4, 3)으로 표현할 수 있으며, </p><br>
 
-<!--function stopPreview() {-->
-<!--  video.currentTime = 0;-->
-<!--  video.playbackRate = 1;-->
-<!--  video.pause();-->
-<!--}-->
+	<h3 id="Innovate-Faster"><a href="#Innovate-Faster" class="headerlink" title="3. Innovate-Faster"></a>3. Innovate Faster</h3>
+	<p>Input Layer는 입력된 이미지 데이터가 최초로 거치게 되는 Layer이다. 모두가 알고 있듯이 이미지는 단순 1차원의 데이터가 아니다. 이미지는 기본적으로 <strong><em>(높이, 넓이, 채널)</em></strong>의 크기를 갖는 3차원의 크기를 가지며, 여기서 채널(channels)의 경우 Gray Scale(1)이냐 RGB(3)이냐 에 따라 크기가 달라지게 된다. (채널의 컬러 공간은 Gray, RGB, HSV, CMYK 등 다양하다)<br>
+		<br><img style="max-width: 600px;" src="./static/images/convnet_info/cnn_img_shape.png"/></p>
+	<p>위와 같은 형태는 높이 4, 넓이 4, 채널 RGB를 갖고 있으므로 위 이미지의 shape은 (4, 4, 3)으로 표현할 수 있으며, </p><br>
 
-<!--let previewTimeout = null;-->
+	<h3 id="Global-in-minutes"><a href="#Global-in-minutes" class="headerlink" title="4. Global-in-minutes"></a>4. Global-in-minutes</h3>
+	<p>Input Layer는 입력된 이미지 데이터가 최초로 거치게 되는 Layer이다. 모두가 알고 있듯이 이미지는 단순 1차원의 데이터가 아니다. 이미지는 기본적으로 <strong><em>(높이, 넓이, 채널)</em></strong>의 크기를 갖는 3차원의 크기를 가지며, 여기서 채널(channels)의 경우 Gray Scale(1)이냐 RGB(3)이냐 에 따라 크기가 달라지게 된다. (채널의 컬러 공간은 Gray, RGB, HSV, CMYK 등 다양하다)<br>
+		<br><img style="max-width: 600px;" src="/static/images/index/edge-location.jfif"/></p>
+	<p>위와 같은 형태는 높이 4, 넓이 4, 채널 RGB를 갖고 있으므로 위 이미지의 shape은 (4, 4, 3)으로 표현할 수 있으며, </p><br>
 
-<!--video.addEventListener("mouseenter", () => {-->
-<!--  startPreview();-->
-<!--  previewTimeout = setTimeout(stopPreview, 4000);-->
-<!--});-->
 
-<!--video.addEventListener("mouseleave", () => {-->
-<!--  clearTimeout(previewTimeout);-->
-<!--  previewTimeout = null;-->
-<!--  stopPreview();-->
-<!--});-->
-</script>
-
+	<br><br>
+</div>
 
 </body>
 </html>
