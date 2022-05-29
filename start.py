@@ -1,6 +1,7 @@
 import os, sys
 from flask import Flask, request, Response
 from flask.templating import render_template
+import neural_style_transfer
 
 # os.getcwd()
 real_path = os.path.dirname(os.path.realpath(__file__))
@@ -47,9 +48,9 @@ def nst_post():
         user_img_path = 'images/' + str(user_img.filename)
 
         # Neural Style Transfer
-        # transfer_img = neural_style_transfer.main(refer_img_path, user_img_path)
-        # transfer_img_path = 'images/'+str(transfer_img.split('/')[-1])
-        transfer_img_path = 'images/nst_result_/nst_reference1.png'
+        transfer_img = neural_style_transfer.main(refer_img_path, user_img_path)
+        transfer_img_path = 'images/nst_result_/'+str(transfer_img.split('/')[-1])
+        # transfer_img_path = 'images/nst_result_/nst_reference1.png'
 
     return render_template('nst_post.html', refer_img=refer_img_path,
                            user_img=user_img_path, transfer_img=transfer_img_path)
