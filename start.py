@@ -1,6 +1,7 @@
 import os, sys
 from flask import Flask, request, Response
 from flask.templating import render_template
+import s3_controller
 # import neural_style_transfer
 
 # os.getcwd()
@@ -50,11 +51,14 @@ def nst_post():
         # Neural Style Transfer
         # transfer_img = neural_style_transfer.main(refer_img_path, user_img_path)
         # transfer_img_path = 'images/nst_result_/'+str(transfer_img.split('/')[-1])
-        # transfer_img_path = 'images/nst_result_/nst_reference1.png'
-    # return render_template('nst_post.html', refer_img=refer_img_path,
-    #                         user_img=user_img_path, transfer_img=transfer_img_path)
+        transfer_img_path = 'images/nst_result_/nst_reference1.png'
 
-    return render_template('nst_post.html', refer_img=refer_img_path, user_img=user_img_path)
+        # S3 upload
+        # s3_controller.handle_upload_img('aws-flask/static/' + transfer_img_path)
+
+    return render_template('nst_post.html', refer_img=refer_img_path,
+                            user_img=user_img_path, transfer_img=transfer_img_path)
+
 
 @app.route('/tsc_get')
 def tsc_get():
@@ -79,6 +83,7 @@ def tsc_post():
 @app.route('/tlad_get')
 def tlad_get():
     return render_template('tlad_get.html')
+
 
 @app.route('/tlad_post', methods=['GET', 'POST'])
 def tlad_post():
