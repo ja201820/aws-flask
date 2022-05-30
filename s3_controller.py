@@ -4,8 +4,8 @@ from botocore.client import Config
 import zipfile
 from io import BytesIO
 
-ACCESS_KEY_ID = 'AKIAXXYHTHP3YHEF5GER'  # s3 관련 권한을 가진 IAM계정 정보
-ACCESS_SECRET_KEY = 'Dk6XUj5IpAJkEqYIANLBLwjHim/umLH60W7BQggC'
+ACCESS_KEY_ID = ''  # s3 관련 권한을 가진 IAM계정 정보
+ACCESS_SECRET_KEY = ''
 BUCKET_NAME = 'mys3dltest'
 
 
