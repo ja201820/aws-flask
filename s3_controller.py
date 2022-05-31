@@ -3,10 +3,7 @@ import botocore.exceptions
 from botocore.client import Config
 import zipfile
 from io import BytesIO
-
-ACCESS_KEY_ID = ''  # s3 관련 권한을 가진 IAM계정 정보
-ACCESS_SECRET_KEY = ''
-BUCKET_NAME = 'mys3dltest'
+import awsConfig
 
 
 def handle_upload_img(f):  # f = 파일명
@@ -14,11 +11,11 @@ def handle_upload_img(f):  # f = 파일명
     # '로컬의 해당파일경로'+ 파일명 + 확장자
     s3 = boto3.resource(
         's3',
-        aws_access_key_id=ACCESS_KEY_ID,
-        aws_secret_access_key=ACCESS_SECRET_KEY,
+        aws_access_key_id=awsConfig.ACCESS_KEY_ID,
+        aws_secret_access_key=awsConfig.ACCESS_SECRET_KEY,
         config=Config(signature_version='s3v4')
     )
-    s3.Bucket(BUCKET_NAME).put_object(
+    s3.Bucket(awsConfig.BUCKET_NAME).put_object(
         Key=f, Body=data)
 
 
@@ -26,11 +23,11 @@ def read_zip(f):
     try:
         s3_resource = boto3.resource(
             's3',
-            aws_access_key_id=ACCESS_KEY_ID,
-            aws_secret_access_key=ACCESS_SECRET_KEY,
+            aws_access_key_id=awsConfig.ACCESS_KEY_ID,
+            aws_secret_access_key=awsConfig.ACCESS_SECRET_KEY,
             config=Config(signature_version='s3v4')
         )
-        zip_obj = s3_resource.Object(bucket_name=BUCKET_NAME, key=f)
+        zip_obj = s3_resource.Object(bucket_name=awsConfig.BUCKET_NAME, key=f)
         buffer = BytesIO(zip_obj.get()["Body"].read())
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == '404':
@@ -41,7 +38,7 @@ def read_zip(f):
         file_info = z.getinfo(filename)
         s3_resource.meta.client.upload_fileobj(
             z.open(filename),
-            Bucket=BUCKET_NAME,
+            Bucket=awsConfig.BUCKET_NAME,
             Key=f'{filename}'
         )
 
