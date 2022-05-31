@@ -73,8 +73,8 @@
 <!-- AWS cloud 설명 -->
 <div class="side-page-main-div">
 
-	<h2 style="color: #353535" id="クラウドコンピューティング">クラウドコンピューティングとは</h2><p><img style="max-width: 600px;" src="/static/images/index/cloud-computing.png" width="500"/></p>
-	<p>합성곱 신경망은 기본적으로 위와 같은 구조로 이루어져 있다. 위 ConvNet을 크게 3덩어리로 짤라서 보면 아래와 같다.</p>
+	<h2 id="クラウドコンピューティング">クラウドコンピューティングとは</h2><p><img style="max-width: 600px;" src="/static/images/index/cloud-computing.png" width="500"/></p>
+	<p>クラウドコンピューティングは、ユーザの直接的な活発な管理なしに、特にデータストレージやコンピューティングパワーのようなコンピュータシステムリソースを必要に応じて提供することです。</p>
 	<br><br>
 
 	<h2 style="color: #8C1DF3" id="awsとは">AWS によるクラウドコンピューティング</h2>
@@ -84,29 +84,36 @@
 	<blockquote>
 		<p><strong><em>1. Cost Savings</em></strong><br><strong><em>2. Elasticity</em></strong><br><strong><em>3. Innovation Faster</em></strong><br><strong><em>4. Go Global in minute</em></strong></p>
 	</blockquote>
-	<p>위 구조를 간단히 설명하면 위에서도 말했듯이 ConvNet은 단순 FC Layer로만 구성되어 있지 않다. Convolutional Layer와 Pooling Layer라는 과정을 거치게 되는데 이는 Input Image의 주요 특징 벡터를 추출하는 과정이라고 할 수 있다. 그 후 이렇게 추출된 주요 특징 벡터들은 그제야 FC Layer를 거치며 1차원 벡터로 변환되고 마지막 Output layer에서 활성화 함수인 Softmax함수를 통해 각 해당 클래스의 확률로 출력되게 된다. 아래에서 각 과정을 좀 더 상세히 살펴보겠다.<br><br></p>
+	<p>“サービスをIT資源にすると考えた時、IT資源を変化すれば企業もより速いスピードで作ることができるのではないでしょうか？”<br>
+		クラウドは根本的に企業のより速い実験とより速い革新をするための障害物を克服するために作られたものです。<br><br></p>
 
 	<h3 id="Cost-Savings"><a href="#Cost-Savings" class="headerlink" title="1. Cost Savings"></a>1. Cost Savings</h3>
-	<p>Input Layer는 입력된 이미지 데이터가 최초로 거치게 되는 Layer이다. 모두가 알고 있듯이 이미지는 단순 1차원의 데이터가 아니다. 이미지는 기본적으로 <strong><em>(높이, 넓이, 채널)</em></strong>의 크기를 갖는 3차원의 크기를 가지며, 여기서 채널(channels)의 경우 Gray Scale(1)이냐 RGB(3)이냐 에 따라 크기가 달라지게 된다. (채널의 컬러 공간은 Gray, RGB, HSV, CMYK 등 다양하다)<br>
+	<p>IT資源の構築は該当企業の事業周期に大きな影響を受けます。<br>
+		ピーク時のためのコンピューティング資源は、普段は「要らない資源」となります。<br>
 		<br><img style="max-width: 600px;" src="/static/images/index/traffic-scaling.png"/></p>
-	<p>위와 같은 형태는 높이 4, 넓이 4, 채널 RGB를 갖고 있으므로 위 이미지의 shape은 (4, 4, 3)으로 표현할 수 있으며, </p><br>
+	<p>上図の白い部分のように基本を越えてスケールアップ部分の遊休コンピューティング空間は結局費用になってしまいます。<br>
+	これに必要な時だけ使えるクラウドがTCOの観点からクラウドがコストを削減する方法です。</p><br>
 
 	<h3 id="Elasticity"><a href="#Elasticity" class="headerlink" title="2. Elasticity"></a>2. Elasticity</h3>
-	<p>Input Layer는 입력된 이미지 데이터가 최초로 거치게 되는 Layer이다. 모두가 알고 있듯이 이미지는 단순 1차원의 데이터가 아니다. 이미지는 기본적으로 <strong><em>(높이, 넓이, 채널)</em></strong>의 크기를 갖는 3차원의 크기를 가지며, 여기서 채널(channels)의 경우 Gray Scale(1)이냐 RGB(3)이냐 에 따라 크기가 달라지게 된다. (채널의 컬러 공간은 Gray, RGB, HSV, CMYK 등 다양하다)<br>
+	<p>クラウドはトラフィックに最適化されるよう弾力性を提供します。<br>
+		つまり、遊休時間をなくしてくれるのです。<br>
+		また、クラウドは使用時間に応じた課金体系であるため、最適化すればするほどコストも削減されます。<br>
 		<br><img style="max-width: 600px;" src="/static/images/index/aws-resilient.png"/></p>
-	<p>위와 같은 형태는 높이 4, 넓이 4, 채널 RGB를 갖고 있으므로 위 이미지의 shape은 (4, 4, 3)으로 표현할 수 있으며, </p><br>
+	<p>上図のように、サービス提供企業の立場では常に右のように予測可能性を期待していますが、実際には左のようにコンピューティング資源の浪費またはトラフィック超過によるサービス障害に直面する場合が日常茶飯事です。</p><br>
 
 	<h3 id="Innovate-Faster"><a href="#Innovate-Faster" class="headerlink" title="3. Innovate-Faster"></a>3. Innovate Faster</h3>
-	<p>Input Layer는 입력된 이미지 데이터가 최초로 거치게 되는 Layer이다. 모두가 알고 있듯이 이미지는 단순 1차원의 데이터가 아니다. 이미지는 기본적으로 <strong><em>(높이, 넓이, 채널)</em></strong>의 크기를 갖는 3차원의 크기를 가지며, 여기서 채널(channels)의 경우 Gray Scale(1)이냐 RGB(3)이냐 에 따라 크기가 달라지게 된다. (채널의 컬러 공간은 Gray, RGB, HSV, CMYK 등 다양하다)<br>
-		<br><img style="max-width: 600px;" src="./static/images/convnet_info/cnn_img_shape.png"/></p>
-	<p>위와 같은 형태는 높이 4, 넓이 4, 채널 RGB를 갖고 있으므로 위 이미지의 shape은 (4, 4, 3)으로 표현할 수 있으며, </p><br>
+	<p>スピーディーなサービスを作るためには、コンピューティングインフラに連携するデータベースから管理ツールに至るまで、数多くの技術オプションを合わせなければなりません。<br>
+		さらにオラクルからインテル、AMDなど様々な仕様の条件にも合致しなければなりません。<br>
+		クラウドの前提は、顧客の本質的なサービスに集中するよう、多様な技術オプションと多様な選択に提供しなければならないということです。
+		</p><br>
 
 	<h3 id="Global-in-minutes"><a href="#Global-in-minutes" class="headerlink" title="4. Global-in-minutes"></a>4. Global-in-minutes</h3>
-	<p>Input Layer는 입력된 이미지 데이터가 최초로 거치게 되는 Layer이다. 모두가 알고 있듯이 이미지는 단순 1차원의 데이터가 아니다. 이미지는 기본적으로 <strong><em>(높이, 넓이, 채널)</em></strong>의 크기를 갖는 3차원의 크기를 가지며, 여기서 채널(channels)의 경우 Gray Scale(1)이냐 RGB(3)이냐 에 따라 크기가 달라지게 된다. (채널의 컬러 공간은 Gray, RGB, HSV, CMYK 등 다양하다)<br>
+	<p>AWSは企業がどこにいても安定的にクラウドを供給します。<br>
+		全世界には約26のリージョンが大都市に位置し、リージョンには約84のコンピューティング利用領域で構成されています。<br>
+		東京に4つ、大阪に3つの可用領域を持つリージョンがあり、スタートアップから大企業まで数万の企業がこれを利用しています。<br>
 		<br><img style="max-width: 600px;" src="/static/images/index/edge-location.jfif"/></p>
-	<p>위와 같은 형태는 높이 4, 넓이 4, 채널 RGB를 갖고 있으므로 위 이미지의 shape은 (4, 4, 3)으로 표현할 수 있으며, </p><br>
-
-
+	<br><br>
+	<h2 style="color: #FFBA40">"We think cloud computing is the future."</h2>
 	<br><br>
 </div>
 
