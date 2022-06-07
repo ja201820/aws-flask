@@ -2,7 +2,7 @@ import os, sys
 from flask import Flask, request, Response
 from flask.templating import render_template
 # import s3_controller
-# import neural_style_transfer
+import neural_style_transfer
 
 # os.getcwd()
 real_path = os.path.dirname(os.path.realpath(__file__))
@@ -16,25 +16,31 @@ app.debug = True  # activating debug mode
 # 사용자는 그 페이지를 좋아할 것이고 다시 방문할 가능성이 커진다.
 # main page
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/aws_info')
 def aws_info():
     return render_template('aws_info.html')
 
+
 @app.route('/flask_info')
 def flask_info():
     return render_template('flask_info.html')
+
 
 @app.route('/dl_info')
 def dl_info():
     return render_template('dl_info.html')
 
+
 @app.route('/nst_get')
 def nst_get():
     return render_template('nst_get.html')
+
 
 @app.route('/nst_post', methods=['GET', 'POST'])
 def nst_post():
@@ -49,9 +55,9 @@ def nst_post():
         user_img_path = 'images/' + str(user_img.filename)
 
         # Neural Style Transfer
-        # transfer_img = neural_style_transfer.main(refer_img_path, user_img_path)
-        # transfer_img_path = 'images/nst_result_/'+str(transfer_img.split('/')[-1])
-        transfer_img_path = 'images/nst_result_/nst_reference1.png'
+        transfer_img = neural_style_transfer.main(refer_img_path, user_img_path)
+        transfer_img_path = 'images/nst_result_/'+str(transfer_img.split('/')[-1])
+        # transfer_img_path = 'images/nst_result_/nst_reference1.png'
 
         # S3 upload
         # s3_controller.handle_upload_img('aws-flask/static/' + transfer_img_path)
@@ -63,6 +69,7 @@ def nst_post():
 @app.route('/tsc_get')
 def tsc_get():
     return render_template('tsc_get.html')
+
 
 @app.route('/tsc_post', methods=['GET', 'POST'])
 def tsc_post():
