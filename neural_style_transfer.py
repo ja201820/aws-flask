@@ -186,6 +186,6 @@ def main(refer_img_path, target_img_path):
 
     return fname
 
-os.getcwd()
+
 if __name__ == "__main__":
     main('nst_reference3.jpg', 'user_test.jpg')

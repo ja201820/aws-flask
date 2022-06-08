@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge; chrome=1">
-    <title>Flask image post</title>
+    <title>Flask video post</title>
 </head>
 <body>
 <style>
@@ -46,6 +46,19 @@
 	</nav>
 </header>
 
+<br>
+<h1 align="center">Drowsy Driving Detection</h1>
+<br>
+<form align="center" action="/ddd_post" method="POST" enctype="multipart/form-data">
+    <h2 align="center">動画を選んでください</h2>
+    <h2 align="center">Target Video</h2>
+    <br>
+    <input type="file" name="user_video" id="user_video" value="userVideo"/>
+    <input type="submit" value="確認">
+
+	<br><br>
+	<h2 align="center">リアルタイムで行う場合</h2>
+</form>
 
 
 

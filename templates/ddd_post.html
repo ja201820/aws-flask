@@ -18,7 +18,10 @@
 	.nav-link{
 		font-weight: bold;
 	}
-
+    .ddd_video{
+            width: 1280px;
+            height: 720px;
+    }
 
 </style>
 
@@ -46,6 +49,21 @@
 	</nav>
 </header>
 
+
+<div class="side-page-main-div">
+    <table align="center">
+        <tr>
+            <th><h2 align="center">Target Video</h2></th>
+			<th><h2 align="center" style="color: #8C1DF3">Transfer Video</h2></th>
+        </tr>
+        <tr align="center">
+            <td><video autoplay class="ddd_video" src="{{url_for('static', filename=user_video)}}"></video></td>
+            <td><video autoplay class="ddd_video" src="{{url_for('static', filename=transfer_video)}}"></video></td>
+<!--            <td colspan="2" align="center"><img class="nst_result_img" src="https://mys3dltest.s3.ap-northeast-1.amazonaws.com/aws-flask/static/images/nst_result_/nst_reference1.png" alt=""></td>-->
+        </tr>
+    </table>
+</div>
+<br>
 
 
 

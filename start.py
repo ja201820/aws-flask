@@ -3,6 +3,7 @@ from flask import Flask, request, Response
 from flask.templating import render_template
 # import s3_controller
 import neural_style_transfer
+import drowsy_driving_detection
 
 # os.getcwd()
 real_path = os.path.dirname(os.path.realpath(__file__))
@@ -106,10 +107,26 @@ def ddd_get():
 
 @app.route('/ddd_post', methods=['GET', 'POST'])
 def ddd_post():
-    # if request.method == 'POST':
+    if request.method == 'POST':
+        # User Video (target video)
+        user_video = request.files['user_video']
+        user_video.save('./aws-flask/static/videos/' + str(user_video.filename))
+        user_video_path = 'videos/' + str(user_video.filename)
 
-    return render_template('ddd_post.html')
+        # drowsy driving detection
+        # transfer_video = drowsy_driving_detection.main(user_video_path)
+        # transfer_video_path = 'videos/ddd_result_/'+str(transfer_video.split('/')[-1])
+        transfer_video_path = 'videos/ddd_result_/result.mp4'
+
+        # S3 upload
+        # s3_controller.handle_upload_img('aws-flask/static/' + transfer_video_path)
+
+    return render_template('ddd_post.html', user_video=user_video_path, transfer_video=transfer_video_path)
 
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port="5000")
+
+
+
+
