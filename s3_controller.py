@@ -19,6 +19,19 @@ def handle_upload_img(f):  # f = 파일명
         Key=f, Body=data)
 
 
+def handle_upload_video(f):  # f = 파일명
+    data = open(f, 'rb')
+    # '로컬의 해당파일경로'+ 파일명 + 확장자
+    s3 = boto3.resource(
+        's3',
+        aws_access_key_id=awsConfig.ACCESS_KEY_ID,
+        aws_secret_access_key=awsConfig.ACCESS_SECRET_KEY,
+        config=Config(signature_version='s3v4')
+    )
+    s3.Bucket(awsConfig.BUCKET_NAME).put_object(
+        Key=f, Body=data)
+
+
 def read_zip(f):
     try:
         s3_resource = boto3.resource(

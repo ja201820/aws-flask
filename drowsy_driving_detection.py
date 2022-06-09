@@ -11,11 +11,13 @@ def main(target_video_path):
     # cap = cv2.VideoCapture(0)
 
     # 비디오 저장
+    target_video_name = target_video_path.split('.')[0].split('/')[-1]
+    fname = 'static/videos/ddd_result_/' + target_video_name + '.mp4'
     width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # 또는 cap.get(3)
     height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 또는 cap.get(4)
     fps = cap.get(cv2.CAP_PROP_FPS)  # 또는 cap.get(5)
     fourcc = cv2.VideoWriter_fourcc(*'avc1')  # 코덱 정의
-    out = cv2.VideoWriter('static/videos/ddd_result_/result.mp4', fourcc, fps, (int(width), int(height)))  # VideoWriter 객체 정의
+    out = cv2.VideoWriter(fname, fourcc, fps, (int(width), int(height)))  # VideoWriter 객체 정의
 
     detector = FaceMeshDetector(maxFaces=1)
     plotY = LivePlot(640, 360, [20, 50], invert=True)
@@ -26,13 +28,9 @@ def main(target_video_path):
     rightRatioList = []
     drowsyDetection = 0
     drowsySec = []
-    drowsyTimer = 0
     color = (255, 0, 255)
     pTime = 0
     cTime = 0
-    sec = 0
-
-
 
     while True:
 
@@ -138,6 +136,8 @@ def main(target_video_path):
     out.release()
     cv2.destroyAllWindows()
 
+    return 'aws-flask/' + fname
+
 
 if __name__ == "__main__":
-    main('static/videos/test2.mp4')
+    main('static/videos/test3.mp4')
