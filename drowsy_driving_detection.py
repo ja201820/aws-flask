@@ -31,6 +31,8 @@ def main(target_video_path):
     color = (255, 0, 255)
     pTime = 0
     cTime = 0
+    alert = 'static/images/kanpan.png'
+    alert = cv2.imread(alert)
 
     while True:
 
@@ -102,6 +104,7 @@ def main(target_video_path):
                         drowsySec.clear()
                     else:
                         print("居眠り運転を感知しました。エアコンを作動します。音楽をつけます。警察に通報します")
+                        img[500:625, 0:1280] = alert
                         color = (255, 0, 255)
                         print(drowsyTimer)
                         drowsySec.clear()
@@ -109,6 +112,7 @@ def main(target_video_path):
 
             cvzone.putTextRect(img, f'Drowsy Detection: {drowsyDetection}', (30, 50),
                                colorR=color)
+
             out.write(img)
             imgPlot = plotY.update(leftRatioAvg, color)
             img = cv2.resize(img, (640, 360))
@@ -123,7 +127,7 @@ def main(target_video_path):
         sec = cTime-pTime
         fps = 1/sec
         pTime = cTime
-        cv2.putText(imgStack, str(int(fps)), (10, 350), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
+        # cv2.putText(imgStack, str(int(fps)), (10, 350), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
 
 
         cv2.imshow("Image", imgStack)
