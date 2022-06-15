@@ -2,7 +2,7 @@ import cv2
 import cvzone
 from cvzone.FaceMeshModule import FaceMeshDetector  # 468 face landmarks
 from cvzone.PlotModule import LivePlot
-import time
+from time import time, localtime
 import os
 
 
@@ -13,8 +13,8 @@ def main(target_video_path):
     # 비디오 저장
     target_video_name = target_video_path.split('.')[0].split('/')[-1]
     fname = 'static/videos/ddd_result_/' + target_video_name + '.mp4'
-    width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # 또는 cap.get(3)
-    height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 또는 cap.get(4)
+    width = 640  # 또는 cap.get(3), cv2.CAP_PROP_FRAME_WIDTH
+    height = 720  # 또는 cap.get(4), cv2.CAP_PROP_FRAME_HEIGHT
     fps = cap.get(cv2.CAP_PROP_FPS)  # 또는 cap.get(5)
     fourcc = cv2.VideoWriter_fourcc(*'avc1')  # 코덱 정의
     out = cv2.VideoWriter(fname, fourcc, fps, (int(width), int(height)))  # VideoWriter 객체 정의
@@ -31,6 +31,7 @@ def main(target_video_path):
     color = (255, 0, 255)
     pTime = 0
     cTime = 0
+    cTimeLog = 0
     alert = 'static/images/kanpan.png'
     alert = cv2.imread(alert)
 
@@ -103,7 +104,11 @@ def main(target_video_path):
                         print(drowsyTimer)
                         drowsySec.clear()
                     else:
-                        print("居眠り運転を感知しました。エアコンを作動します。音楽をつけます。警察に通報します")
+                        tm = localtime(drowsySec[-1])
+                        cTimeLog = f'{tm.tm_year}/{tm.tm_mon}/{tm.tm_mday}_{tm.tm_hour}:{tm.tm_min}:{tm.tm_sec}'
+                        print(f"{cTimeLog}に居眠り運転を感知しました。エアコンを作動します。音楽をつけます。警察に通報します")
+                        cvzone.putTextRect(img, f"{cTimeLog}に居眠り運転を感知しました。", (100, 10),
+                                           colorR=color)
                         img[500:625, 0:1280] = alert
                         color = (255, 0, 255)
                         print(drowsyTimer)
@@ -113,23 +118,23 @@ def main(target_video_path):
             cvzone.putTextRect(img, f'Drowsy Detection: {drowsyDetection}', (30, 50),
                                colorR=color)
 
-            out.write(img)
             imgPlot = plotY.update(leftRatioAvg, color)
             img = cv2.resize(img, (640, 360))
-            imgStack = cvzone.stackImages([img, imgPlot], 2, 1)
+            imgStack = cvzone.stackImages([img, imgPlot], 1, 2)
+            imgStack = cv2.resize(imgStack, (640, 720))
         else:
             img = cv2.resize(img, (640, 360))
-            imgStack = cvzone.stackImages([img, img], 2, 1)
+            imgStack = cvzone.stackImages([img, img], 1, 2)
 
 
         # Frame rate
-        cTime = time.time()
+        cTime = time()
         sec = cTime-pTime
         fps = 1/sec
         pTime = cTime
         # cv2.putText(imgStack, str(int(fps)), (10, 350), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
 
-
+        out.write(imgStack)
         cv2.imshow("Image", imgStack)
         # cv2.waitKey(20)
         if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -140,8 +145,15 @@ def main(target_video_path):
     out.release()
     cv2.destroyAllWindows()
 
-    return 'aws-flask/' + fname
+    return 'aws-flask/' + fname, cTimeLog
 
 
 if __name__ == "__main__":
     main('static/videos/test3.mp4')
+
+
+
+
+
+
+

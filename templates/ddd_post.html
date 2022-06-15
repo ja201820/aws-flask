@@ -19,8 +19,15 @@
 		font-weight: bold;
 	}
     .ddd_video{
+    		position: relative;
+    		top: -180px;
             width: 640px;
             height: 360px;
+    }
+        .ddd_video{
+            position: relative;
+            width: 640px;
+            height: 720px;
     }
 
 </style>
@@ -59,7 +66,7 @@
         </tr>
         <tr align="center">
             <td><video autoplay class="ddd_video" src="{{url_for('static', filename=user_video)}}"></video></td>
-            <td><video autoplay class="ddd_video" src="{{url_for('static', filename=transfer_video)}}"></video></td>
+            <td><video autoplay class="ddd_video_result" src="{{url_for('static', filename=transfer_video)}}"></video></td>
 <!--            <td colspan="2" align="center"><img class="nst_result_img" src="https://mys3dltest.s3.ap-northeast-1.amazonaws.com/aws-flask/static/images/nst_result_/nst_reference1.png" alt=""></td>-->
         </tr>
     </table>

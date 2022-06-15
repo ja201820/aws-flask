@@ -116,9 +116,8 @@ def ddd_post():
         # s3_controller.handle_upload_video('aws-flask/static/' + user_video_path)
 
         # drowsy driving detection
-        transfer_video = drowsy_driving_detection.main(user_video_path)
+        transfer_video, log = drowsy_driving_detection.main(user_video_path)
         transfer_video_path = 'videos/ddd_result_/' + str(transfer_video.split('/')[-1])
-        # transfer_video_path = 'videos/ddd_result_/result.mp4'
 
         # S3 upload
         # s3_controller.handle_upload_video('aws-flask/static/' + transfer_video_path)
