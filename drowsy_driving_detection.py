@@ -12,7 +12,8 @@ def main(target_video_path):
 
     # 비디오 저장
     target_video_name = target_video_path.split('.')[0].split('/')[-1]
-    fname = 'static/videos/ddd_result_/' + target_video_name + '.mp4'
+    path = 'static/videos/ddd_result_/'
+    fname = path + target_video_name + '.mp4'
     width = 640  # 또는 cap.get(3), cv2.CAP_PROP_FRAME_WIDTH
     height = 720  # 또는 cap.get(4), cv2.CAP_PROP_FRAME_HEIGHT
     fps = cap.get(cv2.CAP_PROP_FPS)  # 또는 cap.get(5)
@@ -105,7 +106,7 @@ def main(target_video_path):
                         drowsySec.clear()
                     else:
                         tm = localtime(drowsySec[-1])
-                        cTimeLog = f'{tm.tm_year}/{tm.tm_mon}/{tm.tm_mday}_{tm.tm_hour}:{tm.tm_min}:{tm.tm_sec}'
+                        cTimeLog = f'{tm.tm_year}_{tm.tm_mon}_{tm.tm_mday}_{tm.tm_hour}_{tm.tm_min}_{tm.tm_sec}'
                         print(f"{cTimeLog}に居眠り運転を感知しました。エアコンを作動します。音楽をつけます。警察に通報します")
                         cvzone.putTextRect(img, f"{cTimeLog}に居眠り運転を感知しました。", (100, 10),
                                            colorR=color)
@@ -144,6 +145,10 @@ def main(target_video_path):
     cap.release()
     out.release()
     cv2.destroyAllWindows()
+
+    file_oldname = os.path.join(fname)
+    file_newname_newfile = os.path.join(path + str(cTimeLog) + '.mp4')
+    os.rename(file_oldname, file_newname_newfile)
 
     return 'aws-flask/' + fname, cTimeLog
 
