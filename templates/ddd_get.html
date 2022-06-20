@@ -55,9 +55,17 @@
     <br>
     <input type="file" name="user_video" id="user_video" value="userVideo"/>
     <input type="submit" value="確認">
+	<br><br><br>
+	<h3>S3 Video Lists</h3>
+	{% for list in lists %}
+	{{ loop.index }}.
+	<a href="https://d30r8mjlctud69.cloudfront.net/aws-flask/static/videos/ddd_result_/{{ list }}">{{ list }}</a><br>
+	{% endfor %}
 
-	<br><br>
-	<h2 align="center">リアルタイムで行う場合</h2>
+
+
+	<br><br><br><br>
+	<h2 align="center"><a class="nav-link" href="/ddd_realtime">リアルタイムで行う場合</a></h2>
 </form>
 
 

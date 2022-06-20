@@ -56,6 +56,24 @@ def read_zip(f):
         )
 
 
+def get_list():
+    s3 = boto3.client(
+        's3',
+        aws_access_key_id=awsConfig.ACCESS_KEY_ID,
+        aws_secret_access_key=awsConfig.ACCESS_SECRET_KEY,
+        config=Config(signature_version='s3v4')
+    )
+    prefix = 'aws-flask/static/videos/ddd_result_/'
+    obj_list = s3.list_objects(Bucket=awsConfig.BUCKET_NAME, Prefix=prefix)
+    contents_list = obj_list['Contents']
+    file_lists = []
+    for content in contents_list:
+        file_lists.append(str(content.get('Key').split('/')[-1]))
+
+    return file_lists
+
+
+
 # if __name__ == '__main__':
-    # handle_upload_img("dog-and-cat")
-    # read_zip("dog-and-cat")
+# handle_upload_img("dog-and-cat")
+# read_zip("dog-and-cat")
