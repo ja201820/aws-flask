@@ -103,6 +103,8 @@ def main(target_video_path):
                     if drowsyTimer > 7:
                         drowsyDetection = 0
                         print(drowsyTimer)
+                        tm = localtime(drowsySec[-1])
+                        cTimeLog = f'{tm.tm_year}_{tm.tm_mon}_{tm.tm_mday}_{tm.tm_hour}_{tm.tm_min}_{tm.tm_sec}'
                         drowsySec.clear()
                     else:
                         tm = localtime(drowsySec[-1])
@@ -150,7 +152,7 @@ def main(target_video_path):
     file_newname_newfile = os.path.join(path + str(cTimeLog) + '.mp4')
     os.rename(file_oldname, file_newname_newfile)
 
-    return 'aws-flask/' + fname, cTimeLog
+    return 'aws-flask/' + file_newname_newfile
 
 
 if __name__ == "__main__":
