@@ -156,7 +156,7 @@ def main(target_video_path):
 
 
 if __name__ == "__main__":
-    main('static/videos/test4.mp4')
+    main('static/videos/test3.mp4')
 
 
 
