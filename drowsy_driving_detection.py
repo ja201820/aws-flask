@@ -35,6 +35,7 @@ def main(target_video_path):
     cTimeLog = 0
     alert = 'static/images/kanpan.png'
     alert = cv2.imread(alert)
+    is_alert = False
 
     while True:
 
@@ -60,7 +61,7 @@ def main(target_video_path):
             cv2.line(img, leftUp, leftDown, (0, 200, 0), 3)
             cv2.line(img, leftLeft, leftRight, (0, 200, 0), 3)
             # normalize
-            leftRatio = int((leftLengthVer/leftLengthHor)*100)
+            leftRatio = int((leftLengthVer / leftLengthHor) * 100)
             leftRatioList.append(leftRatio)
             if len(leftRatioList) > 3:
                 leftRatioList.pop(0)
@@ -106,17 +107,19 @@ def main(target_video_path):
                         # tm = localtime(drowsySec[-1])
                         # cTimeLog = f'{tm.tm_year}_{tm.tm_mon}_{tm.tm_mday}_{tm.tm_hour}_{tm.tm_min}_{tm.tm_sec}'
                         drowsySec.clear()
+                        is_alert = False
                     else:
                         tm = localtime(drowsySec[-1])
                         cTimeLog = f'{tm.tm_year}_{tm.tm_mon}_{tm.tm_mday}_{tm.tm_hour}_{tm.tm_min}_{tm.tm_sec}'
                         print(f"{cTimeLog}に居眠り運転を感知しました。エアコンを作動します。音楽をつけます。警察に通報します")
-                        cvzone.putTextRect(img, f"{cTimeLog}に居眠り運転を感知しました。", (100, 10),
-                                           colorR=color)
-                        img[500:625, 0:1280] = alert
                         color = (255, 0, 255)
                         print(drowsyTimer)
                         drowsySec.clear()
                         drowsyDetection = 0
+                        is_alert = True
+
+            if is_alert:
+                img[500:625, 0:1280] = alert
 
             cvzone.putTextRect(img, f'Drowsy Detection: {drowsyDetection}', (30, 50),
                                colorR=color)
@@ -129,11 +132,10 @@ def main(target_video_path):
             img = cv2.resize(img, (640, 360))
             imgStack = cvzone.stackImages([img, img], 1, 2)
 
-
         # Frame rate
         cTime = time()
-        sec = cTime-pTime
-        fps = 1/sec
+        sec = cTime - pTime
+        fps = 1 / sec
         pTime = cTime
         # cv2.putText(imgStack, str(int(fps)), (10, 350), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
 
@@ -156,11 +158,4 @@ def main(target_video_path):
 
 
 if __name__ == "__main__":
-    main('static/videos/test3.mp4')
-
-
-
-
-
-
-
+    main('static/videos/test4.mp4')
