@@ -110,6 +110,7 @@ def tlad_post():
 def ddd_get():
     lists = s3_controller.get_list()
     return render_template('ddd_get.html', lists=lists)
+    # return render_template('ddd_get.html')
 
 
 @app.route('/ddd_post', methods=['GET', 'POST'])
@@ -119,15 +120,26 @@ def ddd_post():
         user_video = request.files['user_video']
         user_video.save('./aws-flask/static/videos/' + str(user_video.filename))
         user_video_path = 'videos/' + str(user_video.filename)
-        # S3 upload
-        s3_controller.handle_upload_video('aws-flask/static/' + user_video_path)
+
+        lists = s3_controller.get_list()
+        for list in lists:
+            if list == user_video.filename:
+                break
+            else:
+                # S3 upload
+                s3_controller.handle_upload_video('aws-flask/static/' + user_video_path)
 
         # drowsy driving detection
         transfer_video = drowsy_driving_detection.main(user_video_path)
         transfer_video_path = 'videos/ddd_result_/' + str(transfer_video.split('/')[-1])
 
-        # S3 upload
-        s3_controller.handle_upload_video('aws-flask/static/' + transfer_video_path)
+        lists = s3_controller.get_list()
+        for list in lists:
+            if list == user_video.filename:
+                break
+            else:
+                # S3 upload
+                s3_controller.handle_upload_video('aws-flask/static/' + transfer_video_path)
 
     return render_template('ddd_post.html', user_video=user_video_path, transfer_video=transfer_video_path)
 
