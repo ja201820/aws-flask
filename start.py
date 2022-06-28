@@ -2,7 +2,7 @@ import os, sys
 from flask import Flask, request, Response
 from flask.templating import render_template
 # import s3_controller
-import neural_style_transfer
+# import neural_style_transfer
 import drowsy_driving_detection
 import cv2
 import cvzone
